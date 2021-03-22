@@ -1,4 +1,4 @@
-import {
+npmimport {
   Streamlit,
   StreamlitComponentBase,
   withStreamlitConnection
