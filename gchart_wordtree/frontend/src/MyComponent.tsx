@@ -1,8 +1,8 @@
-npmimport {
+import {
   Streamlit,
   StreamlitComponentBase,
   withStreamlitConnection
-} from "streamlit-component-lib";
+} from "streamlit-component-lib"
 import React, { ReactNode } from "react"
 
 interface State {
