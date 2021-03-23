@@ -43,27 +43,10 @@ else:
 # `declare_component` and call it done. The wrapper allows us to customize
 # our component's API: we can pre-process its input args, post-process its
 # output value, and add a docstring for users.
-def gchart_wordtree(name, key=None):
-    """Create a new instance of "my_component".
+def explicit_wordtree(data, type, word, width='500px', height='300px', maxFontSize=None, sentenceSeparator=None, wordSeparator=None):
 
-    Parameters
-    ----------
-    name: str
-        The name of the thing we're saying hello to. The component will display
-        the text "Hello, {name}!"
-    key: str or None
-        An optional key that uniquely identifies this component. If this is
-        None, and the component's arguments are changed, the component will
-        be re-mounted in the Streamlit frontend and lose its current state.
 
-    Returns
-    -------
-    int
-        The number of times the component's "Click Me" button has been clicked.
-        (This is the value passed to `Streamlit.setComponentValue` on the
-        frontend.)
 
-    """
     # Call through to our private component function. Arguments we pass here
     # will be sent to the frontend, where they'll be available in an "args"
     # dictionary.
@@ -76,6 +59,10 @@ def gchart_wordtree(name, key=None):
     # There's no need to do this in our simple example - but it's an option.
     return component_value
 
+def implicit_wordtree(data, type, word, width='500px', height='300px', maxFontSize=None, sentenceSeparator=None, wordSeparator=None):
+    # data should be a dictionary of phrases
+    component_value = _component_func(data=data, type=type, word=word)
+    return component_value
 
 # Add some test code to play with the component while it's in development.
 # During development, we can run this just as we would any other Streamlit
@@ -87,20 +74,26 @@ if not _RELEASE:
 
     # Create an instance of our component with a constant `name` arg, and
     # print its output value.
-    num_clicks = gchart_wordtree("World")
-    st.markdown("You've clicked %s times!" % int(num_clicks))
 
-    st.markdown("---")
-    st.subheader("Component with variable args")
-
-    # Create a second instance of our component whose `name` arg will vary
-    # based on a text_input widget.
-    #
-    # We use the special "key" argument to assign a fixed identity to this
-    # component instance. By default, when a component's arguments change,
-    # it is considered a new instance and will be re-mounted on the frontend
-    # and lose its current state. In this case, we want to vary the component's
-    # "name" argument without having it get recreated.
-    name_input = st.text_input("Enter a name", value="Streamlit")
-    num_clicks = gchart_wordtree(name_input, key="foo")
-    st.markdown("You've clicked %s times!" % int(num_clicks))
+    cat_data = [
+        'cats are better than dogs',
+        'cats eat kibble',
+        'cats are better than hamsters',
+        'cats are awesome',
+        'cats are people too',
+        'cats eat mice',
+        'cats meowing',
+        'cats in the cradle',
+        'cats eat mice',
+        'cats in the cradle lyrics',
+        'cats eat kibble',
+        'cats for adoption',
+        'cats are family',
+        'cats eat mice',
+        'cats are better than kittens',
+        'cats are evil',
+        'cats are weird',
+        'cats eat mice'
+    ]
+    implicit_wordtree(data=cat_data, word='cats', type='suffix', width='500px', height='300px')
+    

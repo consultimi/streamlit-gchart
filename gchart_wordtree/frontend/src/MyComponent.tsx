@@ -3,6 +3,7 @@ import {
   StreamlitComponentBase,
   withStreamlitConnection
 } from "streamlit-component-lib"
+import Chart from "react-google-charts";
 import React, { ReactNode } from "react"
 
 interface State {
@@ -19,31 +20,39 @@ class MyComponent extends StreamlitComponentBase<State> {
   public render = (): ReactNode => {
     // Arguments that are passed to the plugin in Python are accessible
     // via `this.props.args`. Here, we access the "name" arg.
-    const name = this.props.args["name"]
+    const data = this.props.args["data"]
+    const word = this.props.args["word"]
 
+    // convert array to array of num_c
+    var data_wrapped = [["Phrases"]].concat(data.map( (x: String) => {
+      return [x]
+    }));
+
+
+    //console.log(clause)
     // Show a button and some text.
     // When the button is clicked, we'll increment our "numClicks" state
     // variable, and send its new value back to Streamlit, where it'll
     // be available to the Python program.
     return (
-      <span>
-        Hello, {name}! &nbsp;
-        <button onClick={this.onClicked} disabled={this.props.disabled}>
-          Click Me!
-        </button>
-      </span>
+      <Chart
+        width={'500px'}
+        height={'500px'}
+        chartType="WordTree"
+        loader={<div>Loading Chart</div>}
+        data={data_wrapped}
+        options={{
+          wordtree: {
+            format: 'implicit',
+            word: {word},
+          },
+        }}
+        rootProps={{ 'data-testid': '1' }}
+      />
     )
   }
 
-  /** Click handler for our "Click Me!" button. */
-  private onClicked = (): void => {
-    // Increment state.numClicks, and pass the new value back to
-    // Streamlit via `Streamlit.setComponentValue`.
-    this.setState(
-      prevState => ({ numClicks: prevState.numClicks + 1 }),
-      () => Streamlit.setComponentValue(this.state.numClicks)
-    )
-  }
+
 }
 
 // "withStreamlitConnection" is a wrapper function. It bootstraps the
