@@ -1,3 +1,6 @@
 
 gchart/frontend/.env
 gchart/frontend/node_modules/
+build/
+dist/
+streamlit_gchart.egg-info/
