@@ -1,10 +1,10 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import MyComponent from "./MyComponent"
+import GChartComponent from "./GChartComponent"
 
 ReactDOM.render(
   <React.StrictMode>
-    <MyComponent />
+    <GChartComponent />
   </React.StrictMode>,
   document.getElementById("root")
 )

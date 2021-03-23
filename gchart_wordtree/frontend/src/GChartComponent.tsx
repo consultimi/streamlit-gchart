@@ -14,19 +14,15 @@ interface State {
  * This is a React-based component template. The `render()` function is called
  * automatically when your component should be re-rendered.
  */
-class MyComponent extends StreamlitComponentBase<State> {
-  public state = { numClicks: 0 }
+class GChartComponent extends StreamlitComponentBase<State> {
 
   public render = (): ReactNode => {
     // Arguments that are passed to the plugin in Python are accessible
     // via `this.props.args`. Here, we access the "name" arg.
-    const data = this.props.args["data"]
-    const word = this.props.args["word"]
 
-    // convert array to array of num_c
-    var data_wrapped = [["Phrases"]].concat(data.map( (x: String) => {
-      return [x]
-    }));
+    //var maxFontSize = parseInt(this.props.args["maxFontSize"])
+    //if (isNaN(maxFontSize)) maxFontSize = 30;
+    console.log(this.props.args["data"])
 
 
     //console.log(clause)
@@ -36,17 +32,12 @@ class MyComponent extends StreamlitComponentBase<State> {
     // be available to the Python program.
     return (
       <Chart
-        width={'500px'}
-        height={'500px'}
-        chartType="WordTree"
+        width={this.props.args["width"]}
+        height={this.props.args["height"]}
+        chartType={this.props.args["chartType"]}
         loader={<div>Loading Chart</div>}
-        data={data_wrapped}
-        options={{
-          wordtree: {
-            format: 'implicit',
-            word: {word},
-          },
-        }}
+        data={this.props.args["data"]}
+        options={this.props.args["options"]}
         rootProps={{ 'data-testid': '1' }}
       />
     )
@@ -60,4 +51,4 @@ class MyComponent extends StreamlitComponentBase<State> {
 // passing arguments from Python -> Component.
 //
 // You don't need to edit withStreamlitConnection (but you're welcome to!).
-export default withStreamlitConnection(MyComponent)
+export default withStreamlitConnection(GChartComponent)
