@@ -19,11 +19,16 @@ class GChartComponent extends StreamlitComponentBase<State> {
   public render = (): ReactNode => {
     // Arguments that are passed to the plugin in Python are accessible
     // via `this.props.args`. Here, we access the "name" arg.
+    
 
-    //var maxFontSize = parseInt(this.props.args["maxFontSize"])
-    //if (isNaN(maxFontSize)) maxFontSize = 30;
-    console.log(this.props.args["data"])
-
+    const chartEvents : any = [
+      {
+        eventName: "ready",
+        callback() {
+          console.log("Setting height ", Streamlit.setFrameHeight());
+        }
+      }
+    ];
 
     //console.log(clause)
     // Show a button and some text.
@@ -32,12 +37,13 @@ class GChartComponent extends StreamlitComponentBase<State> {
     // be available to the Python program.
     return (
       <Chart
-        width={this.props.args["width"]}
-        height={this.props.args["height"]}
+        width={this.props.args["width"] + "px"}
+        height={this.props.args["height"] + "px"}
         chartType={this.props.args["chartType"]}
         loader={<div>Loading Chart</div>}
         data={this.props.args["data"]}
         options={this.props.args["options"]}
+        chartEvents={chartEvents}
         rootProps={{ 'data-testid': '1' }}
       />
     )

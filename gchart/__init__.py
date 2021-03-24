@@ -5,7 +5,7 @@ import streamlit.components.v1 as components
 # the component, and True when we're ready to package and distribute it.
 # (This is, of course, optional - there are innumerable ways to manage your
 # release process.)
-_RELEASE = True
+_RELEASE = False
 
 # Declare a Streamlit component. `declare_component` returns a function
 # that is used to create instances of the component. We're naming this
@@ -39,7 +39,7 @@ else:
 
 
 
-def gchart(key="chart1", data=None, width='500px', height='300px', chartType=None, **kwargs):
+def gchart(key="chart1", data=None, width=600, height=400, chartType=None, **kwargs):
     component_value = _component_func(key=key, data=data, width=width, height=height, chartType=chartType, options=kwargs)
     return component_value
 
@@ -49,47 +49,50 @@ def gchart(key="chart1", data=None, width='500px', height='300px', chartType=Non
 # app: `$ streamlit run my_component/__init__.py`
 if not _RELEASE:
     import streamlit as st
-
+    st.header("Streamlit Google Charts")
     st.subheader("Bar Chart Demo")
 
-    pop_data = [
-        ['City', '2010 Population', '2000 Population'],
-        ['New York City, NY', 8175000, 8008000],
-        ['Los Angeles, CA', 3792000, 3694000],
-        ['Chicago, IL', 2695000, 2896000],
-        ['Houston, TX', 2099000, 1953000],
-        ['Philadelphia, PA', 1526000, 1517000],
-    ]
+    with st.echo(code_location='below'):
+        pop_data = [
+            ['City', '2010 Population', '2000 Population'],
+            ['New York City, NY', 8175000, 8008000],
+            ['Los Angeles, CA', 3792000, 3694000],
+            ['Chicago, IL', 2695000, 2896000],
+            ['Houston, TX', 2099000, 1953000],
+            ['Philadelphia, PA', 1526000, 1517000],
+        ]
 
-    gchart(key="city_chart", data=pop_data, chartType="BarChart", width='500px', height='300px', 
-        title="Population of Largest U.S. Cities", hAxis={"title": 'Total Population', "minValue": 0}, vAxis={"title": 'City'} )
+        gchart(key="city_chart", data=pop_data, chartType="BarChart", 
+            width='500px', height='300px',  title="Population of Largest U.S. Cities", 
+            hAxis={"title": 'Total Population', "minValue": 0}, vAxis={"title": 'City'} )
 
 
     # Create an instance of our component with a constant `name` arg, and
     # print its output value.
     st.subheader("Word Tree Demo")
-
-    cat_data = [
-        ['Phrases'],
-        ['cats are better than dogs'],
-        ['cats eat kibble'],
-        ['cats are better than hamsters'],
-        ['cats are awesome'],
-        ['cats are people too'],
-        ['cats eat mice'],
-        ['cats meowing'],
-        ['cats in the cradle'],
-        ['cats eat mice'],
-        ['cats in the cradle lyrics'],
-        ['cats eat kibble'],
-        ['cats for adoption'],
-        ['cats are family'],
-        ['cats eat mice'],
-        ['cats are better than kittens'],
-        ['cats are evil'],
-        ['cats are weird'],
-        ['cats eat mice']
-    ]
-        
-    gchart(key="cat_chart", data=cat_data, chartType="WordTree", width='500px', height='300px', wordtree={"format": "implicit", "word": "cats"})
+    with st.echo(code_location='below'):
+        cat_data = [
+            ['Phrases'],
+            ['cats are better than dogs'],
+            ['cats eat kibble'],
+            ['cats are better than hamsters'],
+            ['cats are awesome'],
+            ['cats are people too'],
+            ['cats eat mice'],
+            ['cats meowing'],
+            ['cats in the cradle'],
+            ['cats eat mice'],
+            ['cats in the cradle lyrics'],
+            ['cats eat kibble'],
+            ['cats for adoption'],
+            ['cats are family'],
+            ['cats eat mice'],
+            ['cats are better than kittens'],
+            ['cats are evil'],
+            ['cats are weird'],
+            ['cats eat mice']
+        ]
+            
+        gchart(key="cat_chart", data=cat_data, chartType="WordTree", 
+            width=600, height=400, wordtree={"format": "implicit", "word": "cats"})
     
