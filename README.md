@@ -1,5 +1,5 @@
 # Streamlit Google Charts
- Google Charts Component for Streamlit. A lightweight wrapper around [React Google Charts](https://react-google-charts.com/)
+ Google Charts Component for [Streamlit](https://streamlit.io). A lightweight wrapper around [React Google Charts](https://react-google-charts.com/)
 
 
 ```
