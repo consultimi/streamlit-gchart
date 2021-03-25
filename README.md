@@ -1,10 +1,14 @@
 # Streamlit Google Charts
  Google Charts Component for [Streamlit](https://streamlit.io). A lightweight wrapper around [React Google Charts](https://react-google-charts.com/)
 
+## Install
+```pip install streamlit-gchart```
 
+## Usage
 ```
     import streamlit as st
-
+    import streamlit-gchart as gchart
+    
     st.subheader("Bar Chart Demo")
 
     pop_data = [
@@ -16,6 +20,6 @@
         ['Philadelphia, PA', 1526000, 1517000],
     ]
 
-    gchart(key="city_chart", data=pop_data, chartType="BarChart", width='500px', height='300px', 
+    gchart.gchart(key="city_chart", data=pop_data, chartType="BarChart", width='500px', height='300px', 
         title="Population of Largest U.S. Cities", hAxis={"title": 'Total Population', "minValue": 0}, vAxis={"title": 'City'} )
 ```
