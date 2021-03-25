@@ -15,7 +15,7 @@ def readme() -> str:
 
 setuptools.setup(
     name="streamlit-gchart",
-    version="0.1.2",
+    version="0.1.8",
     author="Miles Gard",
     author_email="miles@consultimi.com",
     description="Google Charts wordtree component for Streamlit",

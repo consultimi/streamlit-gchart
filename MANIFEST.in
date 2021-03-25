@@ -1,1 +1,1 @@
-recursive-include gchart/frontend/build *
+recursive-include streamlit_gchart/frontend/build *
