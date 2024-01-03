@@ -7,7 +7,7 @@
 ## Usage
 ```
     import streamlit as st
-    import streamlit-gchart as gchart
+    import streamlit_gchart as gchart
     
     st.subheader("Bar Chart Demo")
 
